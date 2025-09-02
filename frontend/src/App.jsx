@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [data, setData] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/")
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, []);
+  const navigate = useNavigate() 
+
+
+  const goHome = () =>{
+    navigate("/home")
+  }
+
 
   return (
     <div className="p-4 text-center">
-      <h1 className="text-2xl font-bold text-blue-600">React + Tailwind + Express</h1>
-      <p>{data ? data.message : "Cargando..."}</p>
+      <h1 className="font-extrabold">SubastaPro</h1>
+      <button
+      onClick={goHome}
+      className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+      >Haz click aca para ir a Home</button>
     </div>
   );
 }

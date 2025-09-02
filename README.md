@@ -37,3 +37,6 @@ La arquitectura está diseñada para mantener una separación clara entre fronte
 express → framework para crear el servidor.
 cors → permite conectar frontend y backend.
 nodemon → reinicia el servidor automáticamente cuando cambias código.
+
+
+npm install react-router-dom@6
