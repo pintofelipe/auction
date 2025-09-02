@@ -1,23 +1,20 @@
-import { useState } from 'react'
-
-import './App.css'
-import './index.css'
-
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
 
   return (
-    <>
-    <header className='flex justify-center underline hover:cursor-pointer mb-10'>
-      <p className='text-8xl'>Auction</p>
-    </header>
-      <div className='grid-cols-2 grid container mx-auto'>
-        <h1 className='text-6xl font-semibold bg-green-700 flex justify-center items-center'>Coco77</h1>
-        <h3 className='flex justify-center text-9xl font-medium bg-purple-700'>77</h3>
-      </div>
-    </>
-  )
+    <div className="p-4 text-center">
+      <h1 className="text-2xl font-bold text-blue-600">React + Tailwind + Express</h1>
+      <p>{data ? data.message : "Cargando..."}</p>
+    </div>
+  );
 }
 
-export default App
+export default App;
