@@ -48,4 +48,4 @@ npm install mongoose dotenv bcryptjs
 
 - dotenv: Para manejar variables de entorno (como la URL de tu base de datos) de forma segura.
 
-- bcryptjs: Esencial para encriptar (hashear) las contraseñas antes de guardarlas. Nunca guardes contraseñas en texto plano.
+- bcryptjs: Esencial para encriptar (hashear) las contraseñas antes de guardarlas.
