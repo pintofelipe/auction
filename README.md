@@ -40,3 +40,12 @@ nodemon → reinicia el servidor automáticamente cuando cambias código.
 
 
 npm install react-router-dom@6
+
+
+npm install mongoose dotenv bcryptjs
+
+- mongoose: Es la librería estándar para modelar y interactuar con MongoDB en Node.js.
+
+- dotenv: Para manejar variables de entorno (como la URL de tu base de datos) de forma segura.
+
+- bcryptjs: Esencial para encriptar (hashear) las contraseñas antes de guardarlas. Nunca guardes contraseñas en texto plano.
