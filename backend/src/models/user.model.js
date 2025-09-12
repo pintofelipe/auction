@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Profiler } from "react";
 
-mongoose.Schema({
+const userSchema = mongoose.Schema({
   //Campos de autenticacion y rol
 
   username: {
@@ -129,4 +129,5 @@ userSchema.pre('save', async function (next) {
 
 //Exportar el modelo para poder usarlo en otras partes de la aplication (controladores)
 
-module.exports = mongoose.model('User', userSchema);
+
+export default mongoose.model('User', userSchema);
