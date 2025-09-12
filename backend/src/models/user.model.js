@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { Profiler } from "react";
+import bcrypt from "bcryptjs"
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   //Campos de autenticacion y rol
 
   username: {
@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: [8, "La contraseña debe tener al menos 8 caracteres."],
+    select: false
   },
 
   role: {
@@ -46,13 +47,13 @@ const userSchema = mongoose.Schema({
     fullName: {
       type: String,
       required: [true, "El nombre completo es obligatorio."],
-      maxlength: [32, "El nombre completo no puede exceder los 32 caracteres."],
+      maxlength: [50, "El nombre completo no puede exceder los 32 caracteres."],
     },
 
     documentType: {
       type: String,
       required: [true, "El tipo de documento es obligatorio."],
-      enum: ["nit", "cedula", "licencia"],
+      enum: ["nit", "CC", "TI", "TE","PP"],
     },
 
     documentNumber: {
@@ -73,7 +74,7 @@ const userSchema = mongoose.Schema({
     address: {
       type: String,
       required: [true, "La dirección física es obligatoria."],
-      maxlengt: [100, "la dirección no puede exceder los 100 caracteres."],
+      maxlength: [100, "la dirección no puede exceder los 100 caracteres."],
     },
     profilePictureUrl: {
       type: String,
@@ -85,18 +86,31 @@ const userSchema = mongoose.Schema({
 
   personType: {
     type: String,
-    required: [true, "El tipo de persona es obligatorio."],
     enum: ["natural", "juridica"],
+    required: function(){
+      return this.role === "vendedor";
+    }
   },
   bankAccount: {
-    accountNumber: { type: String, required: true },
-    bankName: { type: String, required: true }, //Es buena idea añadir el nombre del banco
+    accountNumber: { type: String, required: function() { 
+      return this.role === "vendedor"} },
+    bankName: { type: String, required: function(){
+      return this.role === "vendedor";
+    } }, //Es buena idea añadir el nombre del banco
   },
 
   //Este objeto solo se llenará si la personType es juridica
   legalInfo: {
-    companyName: { type: String }, //Razon social
-    taxId: { type: String }, //Nit de la empresa
+    companyName: { type: String,
+      required: function(){
+        return this.role === "vendedor" && this.personType === "juridica";
+      }
+    }, //Razon social
+    taxId: { type: String,
+      required: function(){
+        return this.role === "vendedor" && this.personType === "juridica";
+      }
+    }, //Nit de la empresa
   },
 
   //Metadatos del sistema
