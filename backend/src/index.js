@@ -4,5 +4,5 @@ import { connectDB } from "./db.js";
 
 connectDB();
 
-app.listen(3000)
-console.log('server on port', 3000)
+app.listen(77)
+console.log('server on port', 77)
